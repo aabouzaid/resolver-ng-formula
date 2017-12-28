@@ -4,6 +4,9 @@ Defaults:
       enabled: False
       remove: True
       file: /run/resolvconf/resolv.conf
+    networkmanager:
+      file: /etc/NetworkManager/NetworkManager.conf
+      service: NetworkManager
   nameservers:
     - 8.8.8.8
     - 8.8.4.4

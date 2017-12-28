@@ -40,3 +40,20 @@
     - onchanges:
       - file: {{ sls }}~update-resolv.conf-file
 {% endif %}
+
+  {% if salt['file.file_exists']( resolver.ng.networkmanager.file ) %}
+{{ sls }}~disable-networkmanager-resolvconf:
+  file.line:
+    - name: {{ resolver.ng.networkmanager.file }}
+    - after: '[main]'
+    - content: 'dns=none'
+    - mode: ensure
+    - onlyif: systemctl is-enabled {{ resolver.ng.networkmanager.service }}
+    - require:
+      - file: {{ sls }}~update-resolv.conf-file
+  service.running:
+    - name: {{ resolver.ng.networkmanager.service }}
+    - reload: True
+    - watch:
+      - file: {{ sls }}~disable-networkmanager-resolvconf
+{% endif %}
