@@ -8,8 +8,8 @@ before_install:
 
 env:
   matrix:
-    - INSTANCE: resolver-ng-ubuntu-1404
-    - INSTANCE: resolver-ng-centos-7
+      #- INSTANCE: resolver-ng-ubuntu-1404
+      #- INSTANCE: resolver-ng-centos-7
     - INSTANCE: resolver-ng-ubuntu-1404-with-network-manager
 
 script:
